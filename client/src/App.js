@@ -1,0 +1,16 @@
+// modules
+import React from "react";
+
+// components
+import Navigation from "./components/Navigation/Navigation";
+import "./App.scss";
+
+function App() {
+  return (
+    <div className="App">
+      <Navigation />
+    </div>
+  );
+}
+
+export default App;
