@@ -5,6 +5,9 @@ const FETCH_FAILURE = "FETCH_FAILURE";
 const PLAYER_FETCH_DATA = "PLAYER_FETCH_DATA";
 const PLAYER_FETCH_COMPLETE = "PLAYER_FETCH_COMPLETE";
 const PLAYER_FETCH_FAILURE = "PLAYER_FETCH_FAILURE";
+const MOVEMENT_START = "MOVEMENT_START";
+const MOVEMENT_SUCCESS = "MOVEMENT_SUCCESS";
+const MOVEMENT_FAILURE = "MOVEMENT_FAILURE";
 
 const initialState = {
   name: "",
@@ -29,7 +32,8 @@ const initialState = {
   messages: [],
   players: [],
   room_loading: false,
-  player_loading: false
+  player_loading: false,
+  movement_loading: false
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -88,6 +92,29 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         player_errors: action.payload
+      };
+    case MOVEMENT_START:
+      return {
+        ...state,
+        movement_loading: true
+      };
+    case MOVEMENT_SUCCESS:
+      return {
+        ...state,
+        room_id: action.payload.room_id,
+        title: action.payload.title,
+        description: action.payload.description,
+        coordinates: action.payload.coordinates,
+        exits: action.payload.exits,
+        room_cooldown: action.payload.cooldown,
+        messages: action.payload.messages,
+        players: action.payload.players,
+        items: action.payload.items
+      };
+    case MOVEMENT_FAILURE:
+      return {
+        ...state,
+        room_errors: action.payload
       };
     default:
       return {
