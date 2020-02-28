@@ -1,0 +1,22 @@
+.roomdescription-container {
+  width: 33.33%;
+  background: #172121;
+  padding-left: 1%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  .room-coordinate {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    h3 {
+      color: #e5d0cc;
+    }
+    span {
+      color: #e5d0cc;
+    }
+  }
+  .room-description {
+    color: #e5d0cc;
+  }
+}
