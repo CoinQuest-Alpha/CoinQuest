@@ -1,0 +1,15 @@
+.item-container {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid black;
+  .options-for-item {
+    display: flex;
+    border-top: 1px solid black;
+    .option {
+      cursor: pointer;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}

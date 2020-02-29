@@ -16,4 +16,12 @@
       color: #444554;
     }
   }
+  .stats {
+    .inventory {
+      cursor: pointer;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
 }

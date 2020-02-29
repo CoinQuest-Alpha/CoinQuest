@@ -18,5 +18,15 @@
   }
   .room-description {
     color: #e5d0cc;
+    .players-list {
+      display: flex;
+      flex-wrap: wrap;
+      .player {
+        cursor: pointer;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
   }
 }
