@@ -162,7 +162,8 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         pickup_loading: false,
         inventory: [...state.inventory, action.item],
-        items: action.payload.items
+        items: action.payload.items,
+        encumbrance: state.encumbrance + 1
       };
     case PICKUP_FAILURE:
       return {
@@ -180,7 +181,8 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         drop_loading: false,
         inventory: state.inventory.filter(item => item !== action.item),
-        items: action.payload.items
+        items: action.payload.items,
+        encumbrance: state.encumbrance - 1
       };
     case DROP_FAILURE:
       return {
@@ -197,7 +199,8 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         sell_loading: false,
-        inventory: state.inventory.filter(item => item !== action.item)
+        inventory: state.inventory.filter(item => item !== action.item),
+        encumbrance: state.encumbrance - 1
       };
     case SELL_FAILURE:
       return {
