@@ -1,13 +1,13 @@
 // variables
-const FETCHING_DATA = "FETCHING_DATA";
-const FETCH_COMPLETE = "FETCH_COMPLETE";
-const FETCH_FAILURE = "FETCH_FAILURE";
-const PLAYER_FETCH_DATA = "PLAYER_FETCH_DATA";
-const PLAYER_FETCH_COMPLETE = "PLAYER_FETCH_COMPLETE";
-const PLAYER_FETCH_FAILURE = "PLAYER_FETCH_FAILURE";
-const MOVEMENT_START = "MOVEMENT_START";
-const MOVEMENT_SUCCESS = "MOVEMENT_SUCCESS";
-const MOVEMENT_FAILURE = "MOVEMENT_FAILURE";
+export const ROOM_FETCH_START = "ROOM_FETCH_START";
+export const ROOM_FETCH_SUCCESS = "ROOM_FETCH_SUCCESS";
+export const ROOM_FETCH_FAILURE = "ROOM_FETCH_FAILURE";
+export const PLAYER_FETCH_START = "PLAYER_FETCH_START";
+export const PLAYER_FETCH_SUCCESS = "PLAYER_FETCH_SUCCESS";
+export const PLAYER_FETCH_FAILURE = "PLAYER_FETCH_FAILURE";
+export const MOVEMENT_START = "MOVEMENT_START";
+export const MOVEMENT_SUCCESS = "MOVEMENT_SUCCESS";
+export const MOVEMENT_FAILURE = "MOVEMENT_FAILURE";
 
 const initialState = {
   name: "",
@@ -25,6 +25,7 @@ const initialState = {
   description: "",
   coordinates: "",
   exits: [],
+  has_mined: false,
   room_cooldown: 0,
   player_cooldown: 0,
   room_errors: [],
@@ -38,13 +39,13 @@ const initialState = {
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
-    case FETCHING_DATA:
+    case ROOM_FETCH_START:
       return {
         ...state,
         room_loading: true
       };
 
-    case FETCH_COMPLETE:
+    case ROOM_FETCH_SUCCESS:
       return {
         ...state,
         room_id: action.payload.room_id,
@@ -60,18 +61,18 @@ const rootReducer = (state = initialState, action) => {
         room_loading: false
       };
 
-    case FETCH_FAILURE:
+    case ROOM_FETCH_FAILURE:
       return {
         ...state,
         room_errors: action.payload,
         room_loading: false
       };
-    case PLAYER_FETCH_DATA:
+    case PLAYER_FETCH_START:
       return {
         ...state,
         player_loading: true
       };
-    case PLAYER_FETCH_COMPLETE:
+    case PLAYER_FETCH_SUCCESS:
       return {
         ...state,
         name: action.payload.name,
@@ -85,7 +86,7 @@ const rootReducer = (state = initialState, action) => {
         inventory: action.payload.inventory,
         abilities: action.payload.abilities,
         status: action.payload.status,
-        has_mined: action.payload.false,
+        has_mined: action.payload.has_mined,
         messages: action.payload.messages
       };
     case PLAYER_FETCH_FAILURE:

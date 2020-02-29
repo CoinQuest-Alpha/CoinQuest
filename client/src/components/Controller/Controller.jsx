@@ -9,10 +9,11 @@ import instance from "../../utils/instance";
 import "./controller.scss";
 
 // variables
-
-const MOVEMENT_START = "MOVEMENT_START";
-const MOVEMENT_SUCCESS = "MOVEMENT_SUCCESS";
-const MOVEMENT_FAILURE = "MOVEMENT_FAILURE";
+import {
+  MOVEMENT_START,
+  MOVEMENT_SUCCESS,
+  MOVEMENT_FAILURE
+} from "../../reducer/rootReducer";
 
 const Controller = () => {
   const dispatch = useDispatch();

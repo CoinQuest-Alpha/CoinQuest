@@ -14,30 +14,34 @@ import instance from "./utils/instance";
 import "./App.scss";
 
 // variables
-const FETCHING_DATA = "FETCHING_DATA";
-const FETCH_COMPLETE = "FETCH_COMPLETE";
-const FETCH_FAILURE = "FETCH_FAILURE";
-const PLAYER_FETCH_DATA = "PLAYER_FETCH_DATA";
-const PLAYER_FETCH_COMPLETE = "PLAYER_FETCH_COMPLETE";
-const PLAYER_FETCH_FAILURE = "PLAYER_FETCH_FAILURE";
+import {
+  ROOM_FETCH_START,
+  ROOM_FETCH_SUCCESS,
+  ROOM_FETCH_FAILURE,
+  PLAYER_FETCH_START,
+  PLAYER_FETCH_SUCCESS,
+  PLAYER_FETCH_FAILURE
+} from "./reducer/rootReducer";
 
 function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch({ type: FETCHING_DATA });
-    dispatch({ type: PLAYER_FETCH_DATA });
+    dispatch({ type: ROOM_FETCH_START });
+    dispatch({ type: PLAYER_FETCH_START });
     instance
       .get("api/adv/init/")
       .then(res => {
-        dispatch({ type: FETCH_COMPLETE, payload: res.data });
+        dispatch({ type: ROOM_FETCH_SUCCESS, payload: res.data });
         console.log(res.data);
       })
-      .catch(err => dispatch({ type: FETCH_FAILURE, payload: err.response }));
+      .catch(err =>
+        dispatch({ type: ROOM_FETCH_FAILURE, payload: err.response })
+      );
     instance
       .post("api/adv/status/")
       .then(res => {
-        dispatch({ type: PLAYER_FETCH_COMPLETE, payload: res.data });
+        dispatch({ type: PLAYER_FETCH_SUCCESS, payload: res.data });
         console.log(res.data);
       })
       .catch(err => {
