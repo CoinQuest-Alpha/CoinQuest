@@ -5,6 +5,9 @@ import { useSelector } from "react-redux";
 // styling
 import "./playerCard.scss";
 
+// components
+import ButtonDropSell from "../ButtonDropSell/ButtonDropSell";
+
 const PlayerCard = () => {
   const {
     name,
@@ -15,6 +18,7 @@ const PlayerCard = () => {
     inventory,
     status
   } = useSelector(state => state);
+
   return (
     <div className="playercard-container">
       <div className="name-cash">
@@ -26,10 +30,11 @@ const PlayerCard = () => {
         <p>Encumbrance: {encumbrance}</p>
         <p>Strength: {strength}</p>
         <p>Speed: {speed}</p>
+        <p>Items in Inventory:</p>
         {inventory.length > 0 ? (
-          inventory.map(item => <p>{item}</p>)
+          inventory.map((item, i) => <ButtonDropSell key={i} item={item} />)
         ) : (
-          <p>Inventory: There are no items in your inventory</p>
+          <p>There are no items in your inventory.</p>
         )}
       </div>
 

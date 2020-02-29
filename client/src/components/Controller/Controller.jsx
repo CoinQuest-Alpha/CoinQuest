@@ -23,11 +23,12 @@ const Controller = () => {
     instance
       .post("api/adv/move/", direction)
       .then(res => {
+        console.log("Movement to: ", res.data);
         dispatch({ type: MOVEMENT_SUCCESS, payload: res.data });
-        console.log(res.data);
       })
       .catch(err => dispatch({ type: MOVEMENT_FAILURE, payload: err }));
   };
+
   return (
     <div className="controller-container">
       <div className="controller">

@@ -33,7 +33,6 @@ function App() {
       .get("api/adv/init/")
       .then(res => {
         dispatch({ type: ROOM_FETCH_SUCCESS, payload: res.data });
-        console.log(res.data);
       })
       .catch(err =>
         dispatch({ type: ROOM_FETCH_FAILURE, payload: err.response })
@@ -42,7 +41,6 @@ function App() {
       .post("api/adv/status/")
       .then(res => {
         dispatch({ type: PLAYER_FETCH_SUCCESS, payload: res.data });
-        console.log(res.data);
       })
       .catch(err => {
         dispatch({ type: PLAYER_FETCH_FAILURE, payload: err.response });
