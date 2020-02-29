@@ -1,7 +1,7 @@
 // modules
-import React from "react";
+import React, { useEffect } from "react";
 import { DollarSign, Search, ShoppingBag } from "react-feather";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import instance from "../../utils/instance";
 
@@ -12,11 +12,13 @@ import "./controller.scss";
 import {
   MOVEMENT_START,
   MOVEMENT_SUCCESS,
-  MOVEMENT_FAILURE
+  MOVEMENT_FAILURE,
+  COUNT_DECREMENT
 } from "../../reducer/rootReducer";
 
 const Controller = () => {
   const dispatch = useDispatch();
+  const cooldown = useSelector(state => state.cooldown);
 
   const move = direction => {
     dispatch({ type: MOVEMENT_START });
@@ -29,8 +31,19 @@ const Controller = () => {
       .catch(err => dispatch({ type: MOVEMENT_FAILURE, payload: err }));
   };
 
+  useEffect(() => {
+    if (cooldown !== 0) {
+      setTimeout(() => {
+        dispatch({ type: COUNT_DECREMENT });
+      }, 1000);
+    }
+  }, [cooldown, dispatch]);
+
   return (
     <div className="controller-container">
+      <h2>
+        Cooldown: <span>{cooldown}</span>
+      </h2>
       <div className="controller">
         <div className="layer">
           <div className="box" style={{ border: "none" }}></div>

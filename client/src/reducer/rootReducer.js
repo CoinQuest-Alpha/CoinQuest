@@ -20,6 +20,7 @@ export const DROP_FAILURE = "DROP_FAILURE";
 export const SELL_START = "SELL_START";
 export const SELL_SUCCESS = "SELL_SUCCESS";
 export const SELL_FAILURE = "SELL_FAILURE";
+export const COUNT_DECREMENT = "COUNT_DECREMENT";
 
 const initialState = {
   name: "",
@@ -207,6 +208,11 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         sell_loading: false,
         sell_errors: action.payload
+      };
+    case COUNT_DECREMENT:
+      return {
+        ...state,
+        cooldown: state.cooldown - 1
       };
     default:
       return {
