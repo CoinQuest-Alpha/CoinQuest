@@ -16,7 +16,7 @@ const PlayerCard = () => {
     strength,
     speed,
     inventory,
-    status
+    messages
   } = useSelector(state => state);
 
   return (
@@ -38,11 +38,11 @@ const PlayerCard = () => {
         )}
       </div>
 
-      <div className="effects">
-        {status.length > 0 ? (
-          status.map(effect => <p>{effect}</p>)
+      <div className="messages">
+        {messages.length > 0 ? (
+          messages.map(message => <p>{message}</p>)
         ) : (
-          <p>There are no effects.</p>
+          <p>No messages.</p>
         )}
       </div>
     </div>
