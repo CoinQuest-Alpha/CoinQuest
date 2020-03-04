@@ -5,11 +5,14 @@ class Stack {
   append = value => {
     return this.stack.push(value);
   };
-  unappend = value => {
+  unappend = () => {
     return this.stack.pop();
   };
   size = () => {
     return this.stack.length;
+  };
+  tail = () => {
+    return this.stack[this.stack.length - 1];
   };
 }
 
