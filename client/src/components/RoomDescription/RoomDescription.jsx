@@ -10,9 +10,6 @@ import instance from "../../utils/instance";
 
 // variables
 import {
-  EXAMINE_START,
-  EXAMINE_SUCCESS,
-  EXAMINE_FAILURE,
   PICKUP_START,
   PICKUP_SUCCESS,
   PICKUP_FAILURE
@@ -29,20 +26,6 @@ const RoomDescription = () => {
   } = useSelector(state => state);
 
   const dispatch = useDispatch();
-
-  const examine = itemOrPlayer => {
-    const examinedItemOrPlayer = {
-      name: itemOrPlayer
-    };
-    dispatch({ type: EXAMINE_START });
-    instance
-      .post("api/adv/examine", examinedItemOrPlayer)
-      .then(res => {
-        console.log("Examined Item/Player: ", res.data);
-        dispatch({ type: EXAMINE_SUCCESS, payload: res.data });
-      })
-      .catch(err => dispatch({ type: EXAMINE_FAILURE, payload: err.message }));
-  };
 
   const pickup = item => {
     const itemToPickup = {
@@ -83,11 +66,7 @@ const RoomDescription = () => {
         <h4>Players</h4>
         <div className="players-list">
           {players.length > 0 ? (
-            players.map(player => (
-              <p className="player" onClick={() => examine(player)}>
-                {player}&nbsp;
-              </p>
-            ))
+            players.map(player => <p className="player">{player}&nbsp;</p>)
           ) : (
             <p>There are no players in this room.</p>
           )}
